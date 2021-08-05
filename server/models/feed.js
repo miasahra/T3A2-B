@@ -2,7 +2,7 @@ const mongoose = require("mongoose")
 const Schema = mongoose.Schema
 const normalize = require('normalize-mongoose')
 
-const Card = new Schema({
+const Feed = new Schema({
   title: {
     type: String,
     required: true
@@ -28,5 +28,5 @@ const Card = new Schema({
     required: true
   }
 })
-Card.plugin(normalize)
-module.exports = mongoose.model("Card", Card)
+Feed.plugin(normalize)
+module.exports = mongoose.model("Feed", Feed)

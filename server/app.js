@@ -3,7 +3,7 @@ const cors = require('cors')
 const bodyParser = require('body-parser')
 const jwt = require('jsonwebtoken')
 const mongoose = require('mongoose')
-const cardsRouter = require('./routes/cardsRoutes')
+const feedsRouter = require('./routes/feedsRoutes')
 const authRouter = require('./routes/authRoutes')
 const port = process.env.PORT || 4000
 const app = express()
@@ -52,7 +52,7 @@ app.get("/", (req, res) => {
   res.send("Hello world!")
 })
 
-app.use("/cards", cardsRouter)
+app.use("/feeds", feedsRouter)
 app.use("/auth", authRouter)
 app.listen(port, () => {
   console.log(`Trello clone server is running on port ${port}`)
