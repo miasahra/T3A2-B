@@ -10,20 +10,28 @@ const Feed = new Schema({
     required: true,
   },
   left_breast_duration: {
-    type: String,
+    type: Number,
     required: false,
+    integer: true,
   },
-  description: {
-    type: String,
+  right_breast_duration: {
+    type: Number,
+    required: false,
+    integer: true,
+  },
+  feed_duration: {
+    type: Number,
     required: true,
+    integer: true,
   },
-  username: {
-    type: String,
-    required: true,
+  measurement: {
+    type: Number,
+    required: false,
+    integer: true,
   },
-  completed: {
-    type: Boolean,
-    default: false,
+  dependant: {
+    type: Schema.Types.ObjectId,
+    ref: "Dependant",
   },
   created_at: {
     type: Date,
@@ -34,5 +42,6 @@ const Feed = new Schema({
     required: true,
   },
 })
+
 Feed.plugin(normalize)
 module.exports = mongoose.model("Feed", Feed)

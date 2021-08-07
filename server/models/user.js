@@ -18,6 +18,18 @@ const User = new Schema({
     type: String,
     required: true,
   },
+  dependants: [{
+    type: Schema.Types.ObjectId,
+    ref: "Dependant", 
+  }],
+  created_at: {
+    type: Date,
+    required: true,
+  },
+  modified_at: {
+    type: Date,
+    required: true,
+  },
 })
 
 User.methods.comparePassword = function (password) {
