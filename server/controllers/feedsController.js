@@ -3,15 +3,15 @@ const {
   addFeed,
   getFeedById,
   deleteFeed,
-  updateFeed
-} = require('../utils/feedsUtils')
+  updateFeed,
+} = require("../utils/feedsUtils")
 
 const getFeeds = function (req, res) {
   getAllFeeds(req).exec((err, feeds) => {
     if (err) {
       res.status(500)
       return res.json({
-        error: err.message
+        error: err.message,
       })
     }
     res.send(feeds)
@@ -23,7 +23,7 @@ const getFeed = function (req, res) {
     if (err) {
       res.status(404)
       return res.json({
-        error: err.message
+        error: err.message,
       })
     }
     res.send(feed)
@@ -35,7 +35,7 @@ const newFeed = function (req, res) {
     if (err) {
       res.status(500)
       return res.json({
-        error: err.message
+        error: err.message,
       })
     }
     res.send(feed)
@@ -47,7 +47,7 @@ const removeFeed = function (req, res) {
     if (err) {
       res.status(404)
       return res.json({
-        error: err.message
+        error: err.message,
       })
     }
     res.sendStatus(204)
@@ -59,7 +59,7 @@ const changeFeed = function (req, res) {
     if (err) {
       res.status(404)
       return res.json({
-        error: err.message
+        error: err.message,
       })
     }
     res.status(200)
@@ -72,5 +72,5 @@ module.exports = {
   newFeed,
   getFeed,
   removeFeed,
-  changeFeed
+  changeFeed,
 }

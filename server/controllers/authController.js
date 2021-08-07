@@ -1,6 +1,6 @@
-const User = require('../models/user')
-const bcrypt = require('bcrypt')
-const jwt = require('jsonwebtoken')
+const bcrypt = require("bcrypt")
+const jwt = require("jsonwebtoken")
+const User = require("../models/user")
 
 const signUp = function (req, res) {
   const newUser = new User(req.body)
@@ -9,7 +9,7 @@ const signUp = function (req, res) {
     if (err) {
       res.status(400)
       return res.json({
-        error: err.message
+        error: err.message,
       })
     }
     //return res.json(user)
@@ -18,27 +18,26 @@ const signUp = function (req, res) {
       jwt: jwt.sign({
         username: user.username,
         email: user.email,
-        _id: user._id
-      }, process.env.SECRET_KEY)
+        _id: user._id,
+      }, process.env.SECRET_KEY),
     })
   })
-
 }
 
 const signIn = function (req, res) {
   User.findOne({
-    email: req.body.email
+    email: req.body.email,
   }, (err, user) => {
     if (err) {
       res.status(400)
       return res.json({
-        error: err.message
+        error: err.message,
       })
     }
     if (!user || !user.comparePassword(req.body.password)) {
       res.status(400)
       return res.json({
-        message: "Authentication failed"
+        message: "Authentication failed",
       })
     }
     return res.json({
@@ -46,8 +45,8 @@ const signIn = function (req, res) {
       jwt: jwt.sign({
         username: user.username,
         email: user.email,
-        _id: user._id
-      }, process.env.SECRET_KEY)
+        _id: user._id,
+      }, process.env.SECRET_KEY),
     })
   })
 }
@@ -57,7 +56,7 @@ const loginRequired = function (req, res, next) {
     next()
   } else {
     return res.status(401).json({
-      message: "Unauthorized operation"
+      message: "Unauthorized operation",
     })
   }
 }
@@ -65,5 +64,5 @@ const loginRequired = function (req, res, next) {
 module.exports = {
   signUp,
   signIn,
-  loginRequired
+  loginRequired,
 }

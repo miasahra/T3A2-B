@@ -1,32 +1,38 @@
 const mongoose = require("mongoose")
+
 const Schema = mongoose.Schema
-const normalize = require('normalize-mongoose')
+const normalize = require("normalize-mongoose")
 
 const Feed = new Schema({
-  title: {
+  type: {
     type: String,
-    required: true
+    enum: ["BREAST", "BOTTLE"],
+    required: true,
+  },
+  left_breast_duration: {
+    type: String,
+    required: false,
   },
   description: {
     type: String,
-    required: true
+    required: true,
   },
   username: {
     type: String,
-    required: true
+    required: true,
   },
   completed: {
     type: Boolean,
-    default: false
+    default: false,
   },
   created_at: {
     type: Date,
-    required: true
+    required: true,
   },
   modified_at: {
     type: Date,
-    required: true
-  }
+    required: true,
+  },
 })
 Feed.plugin(normalize)
 module.exports = mongoose.model("Feed", Feed)
