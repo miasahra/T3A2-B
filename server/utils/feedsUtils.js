@@ -1,30 +1,53 @@
-const Feed = require ("../models/feed")
+const _ = require("lodash")
+const Feed = require("../models/feed")
 
-const getAllFeeds = function (req){
-    return Feed.find({ username: req.user.username })
+const getAllFeeds = function () {
+  return Feed.find({})
 }
 
-const addFeed = function(req){
-    const date = Date.now()
-    req.body.username = req.user.username
-    req.body.created_at = date
-    req.body.modified_at = date
-    return Feed(req.body)
+const getAllFeedsForUser = function (req) {
+  return Feed.find({
+    user_id: req.user._id,
+  })
 }
 
-const getFeedById = function (id){
-    return Feed.findById(id)
+
+const determineTotalDurationOfFeed = function ({ left_breast_duration, right_breast_duration, bottle_duration }) {
+  // If breast fed
+  if (left_breast_duration || right_breast_duration) {
+    return _.sum([left_breast_duration, right_breast_duration])
+  } else {
+    // If bottle fed
+    return bottle_duration
+  }
 }
 
-const deleteFeed = function(id){
-    return Feed.findByIdAndRemove(id)
+const addFeed = function (req) {
+  req.body.total_duration = determineTotalDurationOfFeed(req.body)
+  req.body.user_id = req.user
+  return Feed(req.body)
 }
 
-const updateFeed = function(req){
-    req.body.modified_at = Date.now()
-    //new: true will return the updated feed
-    return Feed.findByIdAndUpdate(req.params.id, req.body, { new: true })
+const getFeedById = function (id) {
+  return Feed.findById(id)
 }
 
-module.exports = { getAllFeeds, addFeed, getFeedById, deleteFeed, updateFeed }
+const deleteFeed = function (id) {
+  return Feed.findByIdAndRemove(id)
+}
 
+const updateFeed = function (req) {
+  //new: true will return the updated feed
+  return Feed.findByIdAndUpdate(req.params.id, req.body, {
+    new: true,
+  })
+}
+
+module.exports = {
+  getAllFeeds,
+  getAllFeedsForUser,
+  addFeed,
+  getFeedById,
+  deleteFeed,
+  updateFeed,
+}
