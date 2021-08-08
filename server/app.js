@@ -3,7 +3,9 @@ const cors = require("cors")
 const bodyParser = require("body-parser")
 const jwt = require("jsonwebtoken")
 const mongoose = require("mongoose")
+
 const feedsRouter = require("./routes/feedsRoutes")
+const dependantsRouter = require("./routes/dependantsRoutes")
 const authRouter = require("./routes/authRoutes")
 
 const port = process.env.PORT || 4000
@@ -34,7 +36,9 @@ mongoose.connect(dbConn, {
 
 app.use((req, res, next) => {
   if (req.headers && req.headers.authorization) {
-    jwt.verify(req.headers.authorization.split(" ")[1], process.env.SECRET_KEY, (err, decode) => {
+    // req.headers.authorization.split(" ")[1]
+    // Bearer token perhaps
+    jwt.verify(req.headers.authorization, process.env.JWT_ACCESS_TOKEN_SECRET, (err, decode) => {
       if (err) {
         req.user = undefined
       } else {
@@ -53,7 +57,6 @@ app.get("/", (req, res) => {
 })
 
 app.use("/feeds", feedsRouter)
+app.use("/dependants", dependantsRouter)
 app.use("/auth", authRouter)
-app.listen(port, () => {
-  console.log(`Trello clone server is running on port ${port}`)
-})
+app.listen(port)
