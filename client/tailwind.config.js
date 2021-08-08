@@ -1,0 +1,22 @@
+
+const defaultTheme = require("tailwindcss/defaultTheme")
+const colors = require("tailwindcss/colors")
+
+module.exports = {
+  purge: ["./src/components/**/*.{js,ts,jsx,tsx,mdx}", "./public/index.html"],
+  darkMode: false, // or 'media' or 'class'
+  theme: {
+    colors: {
+      ...colors,
+      transparent: "transparent",
+      gray: colors.blueGray,
+    },
+    extend: {
+      fontFamily: { sans: ["Inter var", ...defaultTheme.fontFamily.sans] },
+      screens: { print: { raw: "print" } }, // use utilities like print:text-black
+      container: { center: true },
+    },
+  },
+  variants: { extend: {} },
+  plugins: [],
+}
