@@ -19,7 +19,12 @@ const Feed = new Schema({
     required: false,
     integer: true,
   },
-  feed_duration: {
+  bottle_duration: {
+    type: Number,
+    required: false,
+    integer: true,
+  },
+  total_duration: {
     type: Number,
     required: true,
     integer: true,
@@ -29,19 +34,15 @@ const Feed = new Schema({
     required: false,
     integer: true,
   },
-  dependant: {
+  dependant_id: {
     type: Schema.Types.ObjectId,
     ref: "Dependant",
   },
-  created_at: {
-    type: Date,
-    required: true,
+  user_id: {
+    type: Schema.Types.ObjectId,
+    ref: "User",
   },
-  modified_at: {
-    type: Date,
-    required: true,
-  },
-})
+}, { timestamps: true })
 
 Feed.plugin(normalize)
 module.exports = mongoose.model("Feed", Feed)

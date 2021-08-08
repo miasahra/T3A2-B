@@ -22,15 +22,7 @@ const User = new Schema({
     type: Schema.Types.ObjectId,
     ref: "Dependant", 
   }],
-  created_at: {
-    type: Date,
-    required: true,
-  },
-  modified_at: {
-    type: Date,
-    required: true,
-  },
-})
+}, { timestamps: true })
 
 User.methods.comparePassword = function (password) {
   return bcrypt.compareSync(password, this.hash_password)

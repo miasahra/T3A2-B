@@ -12,18 +12,10 @@ const Dependant = new Schema({
     type: Schema.Types.ObjectId,
     ref: "Feed", 
   }],
-  user: {
+  user_id: {
     type: Schema.Types.ObjectId,
     ref: "User",
   },
-  created_at: {
-    type: Date,
-    required: true,
-  },
-  modified_at: {
-    type: Date,
-    required: true,
-  },
-})
+}, { timestamps: true })
 
 module.exports = mongoose.model("Dependant", Dependant)
