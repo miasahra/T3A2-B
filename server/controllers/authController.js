@@ -19,7 +19,7 @@ const signUp = function (req, res) {
         username: user.username,
         email: user.email,
         _id: user._id,
-      }, process.env.SECRET_KEY),
+      }, process.env.JWT_ACCESS_TOKEN_SECRET),
     })
   })
 }
@@ -46,7 +46,7 @@ const signIn = function (req, res) {
         username: user.username,
         email: user.email,
         _id: user._id,
-      }, process.env.SECRET_KEY),
+      }, process.env.JWT_ACCESS_TOKEN_SECRET),
     })
   })
 }
