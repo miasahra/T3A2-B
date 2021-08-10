@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 import PropTypes from "prop-types"
 import { Link } from "react-router-dom"
-import loginUser from "../utils/loginUser"
+import loginUser from "../../assets/utils/loginUser"
 // eslint-disable-next-line import/extensions
 import BabyBottle from "../../assets/img/baby-bottle.png"
 
