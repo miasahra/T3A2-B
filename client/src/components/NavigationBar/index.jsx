@@ -1,22 +1,17 @@
 /* This example requires Tailwind CSS v2.0+ */
 import React, { Fragment } from "react"
 import PropTypes from "prop-types"
-import { Link, Redirect } from "react-router-dom"
+import { Link } from "react-router-dom"
 import { Popover, Transition } from "@headlessui/react"
 import {
   MenuIcon,
   XIcon,
 } from "@heroicons/react/outline"
 import Routes from "../../assets/utils/routes"
-import logoutUser from "../../assets/utils/logoutUser"
+import Logout from "../../assets/utils/logoutUser"
 import getUsername from "../../assets/utils/getUsername"
 // eslint-disable-next-line import/extensions
 import BabyBottle from "../../assets/img/baby-bottle.png"
-
-function Logout() {
-  logoutUser()
-  return <Redirect to={{ pathname: Routes.Dashboard }} />
-}
 
 export default function NavigationBar({ active }) {
   const username = getUsername()
@@ -56,12 +51,13 @@ export default function NavigationBar({ active }) {
                   {username}
                 </p>
 
-                <a
+                <Link
                   className="ml-8 cursor-pointer whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-blue-600 hover:bg-blue-400"
                   onClick={() => Logout()}
+                  to={Routes.Login}
                 >
                   Log Out
-                </a>
+                </Link>
               </div>
             </div>
           </div>
@@ -109,12 +105,13 @@ export default function NavigationBar({ active }) {
                     </Link>
                   </div>
                   <div>
-                    <a
-                      className="cursor-pointer w-full flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-blue-600 hover:bg-blue-400"
+                    <Link
+                      className="ml-8 cursor-pointer whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-blue-600 hover:bg-blue-400"
                       onClick={() => Logout()}
+                      to={Routes.Login}
                     >
                       Log Out
-                    </a>
+                    </Link>
                     <p className="mt-6 text-center text-base font-medium text-gray-500">
                       <p className="whitespace-nowrap text-base font-medium text-gray-500">
                         {username}
