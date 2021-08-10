@@ -5,8 +5,8 @@
 // If not: they are redirected to the login page.
 import React from "react"
 import PropTypes from "prop-types"
-
 import { Redirect, Route } from "react-router-dom"
+import Routes from "../../assets/utils/routes"
 
 const PrivateRoute = ({ isLoggedIn, component: Component, ...rest }) => (
   <Route
@@ -15,7 +15,7 @@ const PrivateRoute = ({ isLoggedIn, component: Component, ...rest }) => (
       isLoggedIn ? (
         <Component {...props} />
       ) : (
-        <Redirect to={{ pathname: "/login" }} />
+        <Redirect to={{ pathname: Routes.Login }} />
       )
     }
   />

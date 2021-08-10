@@ -1,6 +1,7 @@
 import React, { useState } from "react"
 import PropTypes from "prop-types"
 import { Link } from "react-router-dom"
+import Routes from "../../assets/utils/routes"
 import loginUser from "../../assets/utils/loginUser"
 // eslint-disable-next-line import/extensions
 import BabyBottle from "../../assets/img/baby-bottle.png"
@@ -72,7 +73,7 @@ export default function Login({ setToken }) {
 
           <p className="mt-2 text-center text-sm text-gray-600">
             Dont have an account?{" "}
-            <Link className="font-medium text-blue-400 hover:text-blue-600" to="/register">Register now</Link>
+            <Link className="font-medium text-blue-400 hover:text-blue-600" to={Routes.Register}>Register now</Link>
           </p>
 
           {error &&

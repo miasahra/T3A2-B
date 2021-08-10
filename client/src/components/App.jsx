@@ -19,8 +19,8 @@ function App() {
         path="/"
         render={() => (
           token ?
-            <Redirect to="/dashboard" /> :
-            <Redirect to="/login" />
+            <Redirect to={Routes.Dashboard} /> :
+            <Redirect to={Routes.Login} />
         )}
       />
       <Route path={Routes.Login}>
