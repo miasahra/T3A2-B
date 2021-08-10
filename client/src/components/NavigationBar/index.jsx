@@ -9,6 +9,7 @@ import {
 } from "@heroicons/react/outline"
 import Routes from "../../assets/utils/routes"
 import logoutUser from "../../assets/utils/logoutUser"
+import getUsername from "../../assets/utils/getUsername"
 // eslint-disable-next-line import/extensions
 import BabyBottle from "../../assets/img/baby-bottle.png"
 
@@ -18,6 +19,8 @@ function Logout() {
 }
 
 export default function NavigationBar({ active }) {
+  const username = getUsername()
+
   return (
     <Popover className="relative bg-white">
       {({ open }) => (
@@ -49,9 +52,10 @@ export default function NavigationBar({ active }) {
               </Popover.Group>
 
               <div className="hidden md:flex items-center justify-end md:flex-1 lg:w-0">
-                <Link className={`whitespace-nowrap text-base font-medium ${active == Routes.Account ? "text-blue-500 hover:text-blue-600" : "text-gray-500 hover:text-gray-900"}`} to={Routes.Account}>
-                  Account
-                </Link>
+                <p className="whitespace-nowrap text-base font-medium text-gray-500">
+                  {username}
+                </p>
+
                 <a
                   className="ml-8 cursor-pointer whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-blue-600 hover:bg-blue-400"
                   onClick={() => Logout()}
@@ -112,10 +116,9 @@ export default function NavigationBar({ active }) {
                       Log Out
                     </a>
                     <p className="mt-6 text-center text-base font-medium text-gray-500">
-                      View{" "}
-                      <Link className="text-blue-400 hover:text-blue-600" to={Routes.Account}>
-                        Account
-                      </Link>
+                      <p className="whitespace-nowrap text-base font-medium text-gray-500">
+                        {username}
+                      </p>
                     </p>
                   </div>
                 </div>

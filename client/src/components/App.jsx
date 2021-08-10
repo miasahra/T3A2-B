@@ -7,13 +7,10 @@ import Login from "./Login"
 import Register from "./Register"
 import Dashboard from "./Dashboard"
 import History from "./History"
-import Account from "./Account"
 import AuthedRoute from "./AuthedRoute"
 
 function App() {
   const { token, setToken } = useToken()
-
-  console.log("App token: ", token)
 
   return (
     <Router>
@@ -33,7 +30,6 @@ function App() {
       </Route>
       <AuthedRoute component={Dashboard} path={Routes.Dashboard} token={token} />
       <AuthedRoute component={History} path={Routes.History} token={token} />
-      <AuthedRoute component={Account} path={Routes.Account} token={token} />
     </Router>
   )
 }
