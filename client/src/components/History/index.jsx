@@ -134,7 +134,8 @@ export default function History({ token }) {
   return (
     <>
       <NavigationBar active={Routes.History} />
-      <div className="py-20 px-5">
+      <div className="py-10 px-10">
+        <h1 className="text-3xl pb-4 font-bold text-gray-900">Feed History</h1>
         {renderTable(feeds)}
       </div>
     </>
