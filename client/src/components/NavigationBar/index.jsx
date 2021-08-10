@@ -1,14 +1,23 @@
 /* This example requires Tailwind CSS v2.0+ */
 import React, { Fragment } from "react"
+import PropTypes from "prop-types"
+import { Link, Redirect } from "react-router-dom"
 import { Popover, Transition } from "@headlessui/react"
 import {
   MenuIcon,
   XIcon,
 } from "@heroicons/react/outline"
+import Routes from "../../assets/utils/routes"
+import logoutUser from "../../assets/utils/logoutUser"
 // eslint-disable-next-line import/extensions
 import BabyBottle from "../../assets/img/baby-bottle.png"
 
-export default function NavigationBar() {
+function Logout() {
+  logoutUser()
+  return <Redirect to={{ pathname: Routes.Dashboard }} />
+}
+
+export default function NavigationBar({ active }) {
   return (
     <Popover className="relative bg-white">
       {({ open }) => (
@@ -16,11 +25,13 @@ export default function NavigationBar() {
           <div className="mx-auto">
             <div className="px-4 flex justify-between items-center border-b-2 border-gray-100 py-6 md:justify-start md:space-x-10">
               <div className="flex justify-start lg:w-0 lg:flex-1">
-                <img
-                  alt="Bottle"
-                  className="h-10"
-                  src={BabyBottle}
-                />
+                <Link to={Routes.Dashboard}>
+                  <img
+                    alt="Bottle"
+                    className="h-10"
+                    src={BabyBottle}
+                  />
+                </Link>
               </div>
               <div className="-mr-2 -my-2 md:hidden">
                 <Popover.Button className="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500">
@@ -29,21 +40,21 @@ export default function NavigationBar() {
                 </Popover.Button>
               </div>
               <Popover.Group as="nav" className="hidden md:flex space-x-10">
-                <a className="text-base font-medium text-gray-500 hover:text-gray-900" href="#">
+                <Link className={`text-base font-medium ${active == Routes.Dashboard ? "text-blue-500 hover:text-blue-600" : "text-gray-500 hover:text-gray-900"}`} to={Routes.Dashboard}>
                   Track
-                </a>
-                <a className="text-base font-medium text-gray-500 hover:text-gray-900" href="#">
+                </Link>
+                <Link className={`text-base font-medium ${active == Routes.History ? "text-blue-500 hover:text-blue-600" : "text-gray-500 hover:text-gray-900"}`} to={Routes.History}>
                   History
-                </a>
+                </Link>
               </Popover.Group>
 
               <div className="hidden md:flex items-center justify-end md:flex-1 lg:w-0">
-                <a className="whitespace-nowrap text-base font-medium text-gray-500 hover:text-gray-900" href="#">
+                <Link className={`whitespace-nowrap text-base font-medium ${active == Routes.Account ? "text-blue-500 hover:text-blue-600" : "text-gray-500 hover:text-gray-900"}`} to={Routes.Account}>
                   Account
-                </a>
+                </Link>
                 <a
-                  className="ml-8 whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-blue-600 hover:bg-blue-400"
-                  href="#"
+                  className="ml-8 cursor-pointer whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-blue-600 hover:bg-blue-400"
+                  onClick={() => Logout()}
                 >
                   Log Out
                 </a>
@@ -69,13 +80,13 @@ export default function NavigationBar() {
               <div className="rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 bg-white divide-y-2 divide-gray-50">
                 <div className="pt-5 pb-6 px-5">
                   <div className="flex items-center justify-between">
-                    <div>
+                    <Link to={Routes.Dashboard}>
                       <img
                         alt="Bottle"
                         className="h-10"
                         src={BabyBottle}
                       />
-                    </div>
+                    </Link>
                     <div className="-mr-2">
                       <Popover.Button className="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500">
                         <span className="sr-only">Close menu</span>
@@ -86,26 +97,25 @@ export default function NavigationBar() {
                 </div>
                 <div className="py-6 px-5 space-y-6">
                   <div className="grid grid-cols-2 gap-y-4 gap-x-8">
-                    <a className="text-base font-medium text-gray-900 hover:text-gray-700" href="#">
+                    <Link className={`text-base font-medium ${active == Routes.Dashboard ? "text-blue-900 hover:text-blue-700" : "text-gray-900 hover:text-gray-700"}`} to={Routes.Dashboard}>
                       Track
-                    </a>
-
-                    <a className="text-base font-medium text-gray-900 hover:text-gray-700" href="#">
+                    </Link>
+                    <Link className={`text-base font-medium ${active == Routes.History ? "text-blue-900 hover:text-blue-700" : "text-gray-900 hover:text-gray-700"}`} to={Routes.History}>
                       History
-                    </a>
+                    </Link>
                   </div>
                   <div>
                     <a
-                      className="w-full flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-blue-600 hover:bg-blue-400"
-                      href="#"
+                      className="cursor-pointer w-full flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-blue-600 hover:bg-blue-400"
+                      onClick={() => Logout()}
                     >
                       Log Out
                     </a>
                     <p className="mt-6 text-center text-base font-medium text-gray-500">
                       View{" "}
-                      <a className="text-blue-400 hover:text-blue-600" href="#">
+                      <Link className="text-blue-400 hover:text-blue-600" to={Routes.Account}>
                         Account
-                      </a>
+                      </Link>
                     </p>
                   </div>
                 </div>
@@ -113,7 +123,11 @@ export default function NavigationBar() {
             </Popover.Panel>
           </Transition>
         </>
-      )}
-    </Popover>
+      )
+      }
+    </Popover >
   )
 }
+
+NavigationBar.propTypes = { active: PropTypes.string }
+NavigationBar.defaultProps = { active: "" }

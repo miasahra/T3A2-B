@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import PropTypes from "prop-types"
 import { Link } from "react-router-dom"
 import Routes from "../../assets/utils/routes"
@@ -12,6 +12,10 @@ export default function Register({ setToken }) {
   const [password, setPassword] = useState()
   const [confirmPassword, setConfirmPassword] = useState()
   const [error, setError] = useState()
+
+  useEffect(() => {
+    document.title = "Register - Feeding Tracker"
+  }, [])
 
   const handleSubmit = async (e) => {
     e.preventDefault()

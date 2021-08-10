@@ -13,6 +13,8 @@ import AuthedRoute from "./AuthedRoute"
 function App() {
   const { token, setToken } = useToken()
 
+  console.log("App token: ", token)
+
   return (
     <Router>
       <Route
@@ -29,9 +31,9 @@ function App() {
       <Route path={Routes.Register}>
         <Register setToken={setToken} />
       </Route>
-      <AuthedRoute component={Dashboard} isLoggedIn={token} path={Routes.Dashboard} />
-      <AuthedRoute component={History} isLoggedIn={token} path={Routes.History} />
-      <AuthedRoute component={Account} isLoggedIn={token} path={Routes.Account} />
+      <AuthedRoute component={Dashboard} path={Routes.Dashboard} token={token} />
+      <AuthedRoute component={History} path={Routes.History} token={token} />
+      <AuthedRoute component={Account} path={Routes.Account} token={token} />
     </Router>
   )
 }

@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import PropTypes from "prop-types"
 import { Link } from "react-router-dom"
 import Routes from "../../assets/utils/routes"
@@ -10,6 +10,10 @@ export default function Login({ setToken }) {
   const [email, setEmail] = useState()
   const [password, setPassword] = useState()
   const [error, setError] = useState()
+
+  useEffect(() => {
+    document.title = "Login - Feeding Tracker"
+  }, [])
 
   const handleSubmit = async (e) => {
     e.preventDefault()

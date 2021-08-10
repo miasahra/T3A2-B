@@ -6,5 +6,5 @@ export default async function registerUser(credentials) {
     JSON.stringify(credentials)
   )
     .then(res => res.data)
-    .catch(err => err.json())
+    .catch(err => err)
 }

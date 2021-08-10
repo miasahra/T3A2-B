@@ -8,12 +8,12 @@ import PropTypes from "prop-types"
 import { Redirect, Route } from "react-router-dom"
 import Routes from "../../assets/utils/routes"
 
-const PrivateRoute = ({ isLoggedIn, component: Component, ...rest }) => (
+const PrivateRoute = ({ token, component: Component, ...rest }) => (
   <Route
     {...rest}
     render={props =>
-      isLoggedIn ? (
-        <Component {...props} />
+      token ? (
+        <Component token={token} {...props} />
       ) : (
         <Redirect to={{ pathname: Routes.Login }} />
       )
@@ -22,12 +22,12 @@ const PrivateRoute = ({ isLoggedIn, component: Component, ...rest }) => (
 )
 
 PrivateRoute.propTypes = {
-  isLoggedIn: PropTypes.func,
+  token: PropTypes.func,
   component: PropTypes.elementType,
 }
 
 PrivateRoute.defaultProps = {
-  isLoggedIn: null,
+  token: null,
   component: null,
 }
 
