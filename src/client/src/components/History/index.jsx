@@ -93,11 +93,11 @@ function renderTable(feeds, type) {
                         <div className="text-sm text-gray-900">{readableDate}</div>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
-                        <div className="text-sm text-gray-900">{feed.dependant_id}</div>
+                        <div className="text-sm text-gray-900">{feed.dependant_name}</div>
                       </td>
                       {type == "BOTTLE" &&
                         <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                          <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-orange-200 text-orange-600">
+                          <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-200 text-blue-600">
                             {measurement}
                           </span>
                         </td>
