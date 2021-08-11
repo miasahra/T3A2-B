@@ -9,7 +9,7 @@ function Input({ label, type, placeholder, attribute, value, setValue }) {
       </label>
       <div className="mt-1 relative rounded-md shadow-sm">
         <input
-          className="focus:ring-blue-500 focus:border-blue-500 block w-full pr-12 sm:text-sm border-gray-300 rounded-md"
+          className="block w-full pr-12 sm:text-sm border-gray-300 focus:ring-blue-500 focus:border-blue-500 rounded-md"
           id={attribute}
           name={attribute}
           onChange={e => setValue(e.target.value)}

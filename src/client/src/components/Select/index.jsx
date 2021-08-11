@@ -31,7 +31,7 @@ function Select({ dependants, selected, setSelected }) {
               {dependants.map(dependant => (
                 <Listbox.Option
                   className={({ active }) =>
-                    `${active ? "text-amber-900 bg-amber-100" : "text-gray-900"}
+                    `${active ? "text-blue-900 bg-blue-100" : "text-gray-900"}
                           cursor-default select-none relative py-2 pl-10 pr-4`
                   }
                   key={dependant.id}
@@ -46,7 +46,7 @@ function Select({ dependants, selected, setSelected }) {
                       </span>
                       {selected ? (
                         <span
-                          className={`${active ? "text-amber-600" : "text-amber-600"} absolute inset-y-0 left-0 flex items-center pl-3`}
+                          className={`${active ? "text-blue-600" : "text-blue-600"} absolute inset-y-0 left-0 flex items-center pl-3`}
                         >
                           <CheckIcon aria-hidden="true" className="w-5 h-5" />
                         </span>
