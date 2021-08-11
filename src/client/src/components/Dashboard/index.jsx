@@ -2,7 +2,6 @@ import React, { useEffect, Fragment, useState } from "react"
 import PropTypes from "prop-types"
 import { Link } from "react-router-dom"
 import Input from "../Input"
-// import Select from "../Select"
 import NavigationBar from "../NavigationBar"
 import Routes from "../../assets/utils/routes"
 import getDependants from "../../assets/utils/api/getDependants"
@@ -10,6 +9,7 @@ import createFeed from "../../assets/utils/api/createFeed"
 
 export default function Dashboard({ token }) {
   const [dependants, setDependants] = useState([])
+  const [showDependants, setShowDependants] = useState(true)
   const [type, setType] = useState("")
   const [measurement, setMeasurement] = useState(null)
   const [leftBreastDuration, setLeftBreastDuration] = useState(null)
@@ -25,6 +25,7 @@ export default function Dashboard({ token }) {
     const fetchData = async () => {
       const result = await getDependants(token)
       setDependants(result)
+      if (result.length < 1) { setShowDependants(false) }
     }
 
     fetchData()
@@ -84,7 +85,7 @@ export default function Dashboard({ token }) {
       <div>
         <div className="mt-5 py-10 px-10 md:mt-0 md:col-span-2">
           <h1 className="text-3xl pb-4 font-bold text-gray-900">Track a Feed</h1>
-          {dependants.length == 0 ?
+          {!showDependants ?
             (<p className="px-24 py-24 text-center text-lg text-blue-600">
               You have no Dependants. You must have an existing Dependant in order to track a feed.
               <Link className="font-bold" to={Routes.Account}>
