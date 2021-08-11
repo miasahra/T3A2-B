@@ -41,6 +41,7 @@
     "eslint-plugin-react": "^7.24.0",
     "eslint-plugin-react-hooks": "^4.2.0",
     "eslint-plugin-underscore-to-lodash": "^0.0.2",
+    "lodash": "^4.17.21",
     "postcss": "^7",
     "prettier": "^2.3.2",
     "prop-types": "^15.7.2",
