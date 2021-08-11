@@ -3,21 +3,22 @@ import PropTypes from "prop-types"
 import { Link } from "react-router-dom"
 import Input from "../Input"
 import NavigationBar from "../NavigationBar"
+import Select from "../Select"
 import Routes from "../../assets/utils/routes"
 import getDependants from "../../assets/utils/api/getDependants"
 import createFeed from "../../assets/utils/api/createFeed"
 
 export default function Dashboard({ token }) {
   const [dependants, setDependants] = useState([])
-  const [showDependants, setShowDependants] = useState(true)
+  const [showDependants, setShowDependants] = useState(false)
   const [type, setType] = useState("")
   const [measurement, setMeasurement] = useState(null)
   const [leftBreastDuration, setLeftBreastDuration] = useState(null)
   const [rightBreastDuration, setRightBreastDuration] = useState(null)
   const [bottleDuration, setBottleDuration] = useState(null)
-  const [dependantId, setDependantId] = useState("")
   const [error, setError] = useState("")
   const [success, setSuccess] = useState("")
+  const [selectedDependant, setSelectedDependant] = useState(dependants[0])
 
   useEffect(() => {
     document.title = "Track a Feed - Feeding Tracker"
@@ -25,7 +26,7 @@ export default function Dashboard({ token }) {
     const fetchData = async () => {
       const result = await getDependants(token)
       setDependants(result)
-      if (result.length < 1) { setShowDependants(false) }
+      if (result.length > 0) { setShowDependants(true) }
     }
 
     fetchData()
@@ -39,7 +40,7 @@ export default function Dashboard({ token }) {
     // Handle input validation
     if (type !== "BREAST" && type !== "BOTTLE") {
       return setError("You must provide a valid feed type for this feed!")
-    } else if (isFalsey(dependantId)) {
+    } else if (isFalsey(selectedDependant)) {
       return setError("You must provide a dependant for this feed!")
     } else if (type == "BREAST" && (isFalsey(leftBreastDuration) && isFalsey(rightBreastDuration))) {
       return setError("You must provide a breast duration time!")
@@ -56,14 +57,16 @@ export default function Dashboard({ token }) {
         type,
         left_breast_duration: leftBreastDuration,
         right_breast_duration: rightBreastDuration,
-        dependant_id: dependantId,
+        dependant_id: selectedDependant._id,
+        dependant_name: selectedDependant.name,
       })
     } else {
       res = await createFeed(token, {
         type,
         measurement,
         bottle_duration: bottleDuration,
-        dependant_id: dependantId,
+        dependant_id: selectedDependant._id,
+        dependant_name: selectedDependant.name,
       })
     }
 
@@ -76,8 +79,6 @@ export default function Dashboard({ token }) {
       setSuccess("You have successfully logged a feeding session! You can view this in History.")
     }
   }
-
-  console.log(dependants)
 
   return (
     <>
@@ -96,7 +97,7 @@ export default function Dashboard({ token }) {
             <form action="#" method="POST" onSubmit={handleSubmit}>
               <div className="shadow sm:rounded-md sm:overflow-hidden">
                 <div className="px-4 py-5 bg-white space-y-6 sm:p-6">
-                  <Input attribute="dependantId" label="Dependant" placeholder="id" setValue={setDependantId} type="text" value={dependantId} />
+                  <Select dependants={dependants} selected={selectedDependant} setSelected={setSelectedDependant} />
                   <Input attribute="type" label="Type" placeholder="BOTTLE or BREAST" setValue={setType} type="text" value={type} />
                   <Input attribute="measurement" label="Measurement" placeholder="Measurement (mL)" setValue={setMeasurement} type="text" value={measurement} />
                   <Input attribute="leftBreastDuration" label="Left Breast Duration" placeholder="15 (mins)" setValue={setLeftBreastDuration} type="number" value={leftBreastDuration} />

@@ -38,6 +38,10 @@ const Feed = new Schema({
     type: Schema.Types.ObjectId,
     ref: "Dependant",
   },
+  dependant_name: {
+    type: String,
+    required: true,
+  },
   user_id: {
     type: Schema.Types.ObjectId,
     ref: "User",
