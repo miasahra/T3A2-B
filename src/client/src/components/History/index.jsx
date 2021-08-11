@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react"
 import PropTypes from "prop-types"
+// import _ from "lodash"
 import NavigationBar from "../NavigationBar"
 import Routes from "../../assets/utils/routes"
-import getHistory from "../../assets/utils/getHistory"
+import getHistory from "../../assets/utils/api/getHistory"
+// import getDependants from "../../assets/utils/api/getDependants"
 // eslint-disable-next-line import/extensions
 import BabyBottle from "../../assets/img/baby-bottle.png"
 import BreastFeeding from "../../assets/img/breast-feeding.jpg"
@@ -119,17 +121,42 @@ function renderTable(feeds) {
 
 export default function History({ token }) {
   const [feeds, setFeeds] = useState([])
+  // const [dependants, setDependants] = useState([])
 
   useEffect(() => {
     document.title = "History - Feeding Tracker"
 
-    const fetchData = async () => {
+    const fetchFeeds = async () => {
       const result = await getHistory(token)
       setFeeds(result)
     }
 
-    fetchData()
+    // const fetchDependants = async () => {
+    //   const result = await getDependants(token)
+    //   setDependants(result)
+    // }
+
+    fetchFeeds()
+    // fetchDependants()
   }, [token])
+
+  // const formatFeedsByDependant = () => {
+  //   const feedGroup = _.groupBy(feeds, "dependant_id")
+  //   const dependantGroup = _.groupBy(dependants, "_id")
+  //   const mergedArrays = _.merge(feedGroup, dependantGroup)
+  //   // eslint-disable-next-line no-debugger
+  //   debugger
+  //   const filteredFeeds = mergedArrays.filter(feed => feed.type)
+  //   console.log("filteredFeeds", filteredFeeds)
+
+  //   return filteredFeeds
+  // }
+
+  // console.log("feeds", feeds)
+  // console.log("dependants", dependants)
+
+  // console.log("formatted: ", formatFeedsByDependant())
+
 
   return (
     <>
