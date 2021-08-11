@@ -106,7 +106,7 @@ export default function NavigationBar({ active }) {
                   </div>
                   <div>
                     <Link
-                      className="ml-8 cursor-pointer whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-blue-600 hover:bg-blue-400"
+                      className="w-full cursor-pointer flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-blue-600 hover:bg-blue-400"
                       onClick={() => Logout()}
                       to={Routes.Login}
                     >
