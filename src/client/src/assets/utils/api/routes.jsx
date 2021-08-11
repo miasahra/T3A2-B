@@ -7,7 +7,10 @@ const apiRoutes = {
     MyFeeds: "/feeds/me",
     NewFeed: "/feeds",
   },
-  dependants: { MyDependants: "/dependants/" },
+  dependants: {
+    MyDependants: "/dependants/",
+    NewDependant: "/dependants",
+  },
 }
 
 export default apiRoutes

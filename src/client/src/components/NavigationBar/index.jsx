@@ -47,9 +47,9 @@ export default function NavigationBar({ active }) {
               </Popover.Group>
 
               <div className="hidden md:flex items-center justify-end md:flex-1 lg:w-0">
-                <p className="whitespace-nowrap text-base font-medium text-gray-500">
+                <Link className="whitespace-nowrap text-base font-medium text-gray-500 hover:text-gray-800" to={Routes.Account}>
                   {username}
-                </p>
+                </Link>
 
                 <Link
                   className="ml-8 cursor-pointer whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-blue-600 hover:bg-blue-400"
@@ -113,9 +113,9 @@ export default function NavigationBar({ active }) {
                       Log Out
                     </Link>
                     <p className="mt-6 text-center text-base font-medium text-gray-500">
-                      <p className="whitespace-nowrap text-base font-medium text-gray-500">
+                      <Link className="whitespace-nowrap text-base font-medium text-gray-500 hover:text-gray-800" to={Routes.Account}>
                         {username}
-                      </p>
+                      </Link>
                     </p>
                   </div>
                 </div>

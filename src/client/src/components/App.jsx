@@ -8,6 +8,7 @@ import Register from "./Register"
 import Dashboard from "./Dashboard"
 import History from "./History"
 import AuthedRoute from "./AuthedRoute"
+import Account from "./Account"
 
 function App() {
   const { token, setToken } = useToken()
@@ -30,6 +31,7 @@ function App() {
       </Route>
       <AuthedRoute component={Dashboard} path={Routes.Dashboard} token={token} />
       <AuthedRoute component={History} path={Routes.History} token={token} />
+      <AuthedRoute component={Account} path={Routes.Account} token={token} />
     </Router>
   )
 }
