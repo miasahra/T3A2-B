@@ -1,6 +1,7 @@
 import React, { useEffect, Fragment, useState } from "react"
 import PropTypes from "prop-types"
 import { Link } from "react-router-dom"
+import { Tab } from "@headlessui/react"
 import Input from "../Input"
 import NavigationBar from "../NavigationBar"
 import Select from "../Select"
@@ -8,10 +9,14 @@ import Routes from "../../assets/utils/routes"
 import getDependants from "../../assets/utils/api/getDependants"
 import createFeed from "../../assets/utils/api/createFeed"
 
+function classNames(...classes) {
+  return classes.filter(Boolean).join(" ")
+}
+
 export default function Dashboard({ token }) {
   const [dependants, setDependants] = useState([])
   const [showDependants, setShowDependants] = useState(false)
-  const [type, setType] = useState("")
+  const [type, setType] = useState("BOTTLE")
   const [measurement, setMeasurement] = useState(null)
   const [leftBreastDuration, setLeftBreastDuration] = useState(null)
   const [rightBreastDuration, setRightBreastDuration] = useState(null)
@@ -19,6 +24,10 @@ export default function Dashboard({ token }) {
   const [error, setError] = useState("")
   const [success, setSuccess] = useState("")
   const [selectedDependant, setSelectedDependant] = useState(dependants[0])
+  const [feedingTypes] = useState({
+    BOTTLE: { type: "BOTTLE" },
+    BREAST: { type: "BREAST" },
+  })
 
   useEffect(() => {
     document.title = "Track a Feed - Feeding Tracker"
@@ -95,34 +104,70 @@ export default function Dashboard({ token }) {
             </p>)
             :
             <form action="#" method="POST" onSubmit={handleSubmit}>
-              <div className="shadow sm:rounded-md sm:overflow-hidden">
-                <div className="px-4 py-5 bg-white space-y-6 sm:p-6">
-                  <Select dependants={dependants} selected={selectedDependant} setSelected={setSelectedDependant} />
-                  <Input attribute="type" label="Type" placeholder="BOTTLE or BREAST" setValue={setType} type="text" value={type} />
-                  <Input attribute="measurement" label="Measurement" placeholder="Measurement (mL)" setValue={setMeasurement} type="text" value={measurement} />
-                  <Input attribute="leftBreastDuration" label="Left Breast Duration" placeholder="15 (mins)" setValue={setLeftBreastDuration} type="number" value={leftBreastDuration} />
-                  <Input attribute="rightBreastDuration" label="Right Breast Duration" placeholder="15 (mins)" setValue={setRightBreastDuration} type="number" value={rightBreastDuration} />
-                  <Input attribute="bottleDuration" label="Bottle Duration" placeholder="15 (mins)" setValue={setBottleDuration} type="number" value={bottleDuration} />
-                </div>
-                {error &&
-                  <p className="mt-2 mb-8 text-center text-sm text-red-600">
-                    {error}
-                  </p>
-                }
+              <div className="w-full px-2 py-4 sm:px-0">
+                <Tab.Group>
+                  <Tab.List className="flex p-1 space-x-1 bg-blue-900/20 rounded-xl">
+                    {Object.keys(feedingTypes).map(feed => (
+                      <Tab
+                        className={({ selected }) =>
+                          classNames(
+                            "w-full py-2.5 text-sm leading-5 font-medium text-blue-700 rounded-lg",
+                            "focus:outline-none focus:ring-2 ring-offset-2 ring-offset-blue-400 ring-white ring-opacity-60",
+                            selected
+                              ? "bg-white shadow"
+                              : "text-blue-100 hover:bg-white/[0.12] hover:text-white"
+                          )
+                        }
+                        key={feed}
+                      >
+                        {feed}
+                      </Tab>
+                    ))}
+                  </Tab.List>
+                  <Tab.Panels className="mt-2">
+                    <div className="shadow sm:rounded-md sm:overflow-hidden">
+                      {Object.values(feedingTypes).map(feed => (
+                        <Tab.Panel
+                          className={classNames(
+                            "bg-white rounded-xl p-3",
+                            "focus:outline-none focus:ring-2 ring-offset-2 ring-offset-blue-400 ring-white ring-opacity-60"
+                          )}
+                          key={feed.type}
+                          onClick={() => setType(feed.type)}
+                        >
+                          <div className="px-4 py-5 bg-white space-y-6 sm:p-6">
+                            <Select dependants={dependants} selected={selectedDependant} setSelected={setSelectedDependant} />
+                            {feed.type == "BOTTLE" && <Input attribute="measurement" label="Measurement" placeholder="Measurement (mL)" setValue={setMeasurement} type="text" value={measurement} />}
+                            {feed.type == "BREAST" && <Input attribute="leftBreastDuration" label="Left Breast Duration" placeholder="15 (mins)" setValue={setLeftBreastDuration} type="number" value={leftBreastDuration} />}
+                            {feed.type == "BREAST" && <Input attribute="rightBreastDuration" label="Right Breast Duration" placeholder="15 (mins)" setValue={setRightBreastDuration} type="number" value={rightBreastDuration} />}
+                            {feed.type == "BOTTLE" && <Input attribute="bottleDuration" label="Bottle Duration" placeholder="15 (mins)" setValue={setBottleDuration} type="number" value={bottleDuration} />}
+                          </div>
+                        </Tab.Panel>
+                      ))}
 
-                {success &&
-                  <p className="mt-2 mb-8 text-center text-sm text-blue-600">
-                    {success}
-                  </p>
-                }
-                <div className="px-4 py-3 bg-gray-50 text-right sm:px-6">
-                  <button
-                    className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
-                    type="submit"
-                  >
-                    Track Feed
-                  </button>
-                </div>
+                      {error &&
+                        <p className="mt-2 mb-8 text-center text-sm text-red-600">
+                          {error}
+                        </p>
+                      }
+
+                      {success &&
+                        <p className="mt-2 mb-8 text-center text-sm text-blue-600">
+                          {success}
+                        </p>
+                      }
+
+                      <div className="px-4 py-3 bg-gray-50 text-right sm:px-6">
+                        <button
+                          className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                          type="submit"
+                        >
+                          Track Feed
+                        </button>
+                      </div>
+                    </div>
+                  </Tab.Panels>
+                </Tab.Group>
               </div>
             </form>
           }
