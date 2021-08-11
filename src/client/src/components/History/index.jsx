@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react"
 import PropTypes from "prop-types"
 // import _ from "lodash"
+import { Link } from "react-router-dom"
 import NavigationBar from "../NavigationBar"
 import Routes from "../../assets/utils/routes"
 import getHistory from "../../assets/utils/api/getHistory"
@@ -9,7 +10,7 @@ import getHistory from "../../assets/utils/api/getHistory"
 import BabyBottle from "../../assets/img/baby-bottle.png"
 import BreastFeeding from "../../assets/img/breast-feeding.jpg"
 
-function renderTable(feeds) {
+function renderTable(feeds, type) {
   const sortedFeeds = feeds.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
 
   return (
@@ -38,24 +39,31 @@ function renderTable(feeds) {
                   >
                     Name
                   </th>
-                  <th
-                    className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                    scope="col"
-                  >
-                    Measurement
-                  </th>
-                  <th
-                    className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                    scope="col"
-                  >
-                    Left Breast Duration
-                  </th>
-                  <th
-                    className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                    scope="col"
-                  >
-                    Right Breast Duration
-                  </th>
+                  {type == "BOTTLE" &&
+
+                    <th
+                      className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                      scope="col"
+                    >
+                      Measurement
+                    </th>
+                  }
+                  {type == "BREAST" &&
+                    (<>
+                      <th
+                        className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                        scope="col"
+                      >
+                        Left Breast Duration
+                      </th>
+                      <th
+                        className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                        scope="col"
+                      >
+                        Right Breast Duration
+                      </th>
+                    </>)
+                  }
                   <th
                     className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                     scope="col"
@@ -87,21 +95,27 @@ function renderTable(feeds) {
                       <td className="px-6 py-4 whitespace-nowrap">
                         <div className="text-sm text-gray-900">{feed.dependant_id}</div>
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                        <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-orange-200 text-orange-600">
-                          {measurement}
-                        </span>
-                      </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                        <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-200 text-blue-600">
-                          {leftBreastDuration}
-                        </span>
-                      </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                        <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-200 text-blue-600">
-                          {rightBreastDuration}
-                        </span>
-                      </td>
+                      {type == "BOTTLE" &&
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                          <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-orange-200 text-orange-600">
+                            {measurement}
+                          </span>
+                        </td>
+                      }
+                      {type == "BREAST" &&
+                        (<>
+                          <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                            <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-200 text-blue-600">
+                              {leftBreastDuration}
+                            </span>
+                          </td>
+                          <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                            <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-200 text-blue-600">
+                              {rightBreastDuration}
+                            </span>
+                          </td>
+                        </>)
+                      }
                       <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                         <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-200 text-blue-600">
                           {totalDuration}
@@ -157,13 +171,34 @@ export default function History({ token }) {
 
   // console.log("formatted: ", formatFeedsByDependant())
 
+  const breastFeeds = feeds.filter(feed => feed.type == "BREAST")
+  const bottleFeeds = feeds.filter(feed => feed.type == "BOTTLE")
 
   return (
     <>
       <NavigationBar active={Routes.History} />
       <div className="py-10 px-10">
         <h1 className="text-3xl pb-4 font-bold text-gray-900">Feed History</h1>
-        {renderTable(feeds)}
+        {breastFeeds.length > 0 &&
+          <div>
+            <h2 className="text-2xl pb-4 font-bold text-gray-700">Breast Feeds</h2>
+            {renderTable(breastFeeds, "BREAST")}
+          </div>
+        }
+        {bottleFeeds.length > 0 &&
+          <div className="mt-6">
+            <h2 className="text-2xl pb-4 font-bold text-gray-700">Bottle Feeds</h2>
+            {renderTable(bottleFeeds, "BOTTLE")}
+          </div>
+        }
+        {breastFeeds.length < 1 && bottleFeeds.length < 1 &&
+          (<p className="px-24 py-24 text-center text-lg text-blue-600">
+            You have no feed history. You must have an existing Dependant in order to track a feed.
+            <Link className="font-bold" to={Routes.Dashboard}>
+              {" "}Click here to track a feed.
+            </Link>
+          </p>)
+        }
       </div>
     </>
   )
