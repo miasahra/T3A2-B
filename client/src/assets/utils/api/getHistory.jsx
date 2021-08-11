@@ -1,5 +1,5 @@
 import axios from "axios"
-import apiRoutes from "../../assets/utils/api/routes"
+import apiRoutes from "./routes"
 
 export default async function getHistory(token) {
   return axios.get(apiRoutes.feeds.MyFeeds, { headers: { Authorization: token } })

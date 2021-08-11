@@ -3,7 +3,11 @@ const apiRoutes = {
     Login: "/auth/sign_in",
     Register: "/auth/sign_up",
   },
-  feeds: { MyFeeds: "/feeds/me" },
+  feeds: {
+    MyFeeds: "/feeds/me",
+    NewFeed: "/feeds",
+  },
+  dependants: { MyDependants: "/dependants/" },
 }
 
 export default apiRoutes

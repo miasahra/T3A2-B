@@ -1,5 +1,5 @@
 import axios from "axios"
-import apiRoutes from "../../assets/utils/api/routes"
+import apiRoutes from "./routes"
 
 export default async function registerUser(credentials) {
   return axios.post(apiRoutes.auth.Register,
