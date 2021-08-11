@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react"
 import PropTypes from "prop-types"
 import { Link } from "react-router-dom"
 import Routes from "../../assets/utils/routes"
-import registerUser from "../../assets/utils/registerUser"
+import registerUser from "../../assets/utils/api/registerUser"
 // eslint-disable-next-line import/extensions
 import BabyBottle from "../../assets/img/baby-bottle.png"
 
@@ -27,13 +27,14 @@ export default function Register({ setToken }) {
     })
 
     if (res.message) {
-      setError(res.message)
+      setError("Authentication failed, please try again!")
     } else if (res.error) {
       setError(res.error)
     } else {
       setToken(res)
     }
   }
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full space-y-8">

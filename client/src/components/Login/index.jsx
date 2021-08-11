@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react"
 import PropTypes from "prop-types"
 import { Link } from "react-router-dom"
 import Routes from "../../assets/utils/routes"
-import loginUser from "../../assets/utils/loginUser"
+import loginUser from "../../assets/utils/api/loginUser"
 // eslint-disable-next-line import/extensions
 import BabyBottle from "../../assets/img/baby-bottle.png"
 
@@ -23,7 +23,7 @@ export default function Login({ setToken }) {
     })
 
     if (res.message) {
-      setError(res.message)
+      setError("Authentication failed, please try again!")
     } else {
       setToken(res)
     }
