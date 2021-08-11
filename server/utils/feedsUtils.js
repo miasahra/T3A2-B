@@ -14,11 +14,11 @@ const getAllFeedsForUser = function (req) {
 
 const determineTotalDurationOfFeed = function ({ left_breast_duration, right_breast_duration, bottle_duration }) {
   // If breast fed
-  if (left_breast_duration || right_breast_duration) {
-    return _.sum([left_breast_duration, right_breast_duration])
+  if (Number(left_breast_duration) > 0 || Number(right_breast_duration) > 0) {
+    return _.sum([Number(left_breast_duration), Number(right_breast_duration)])
   } else {
     // If bottle fed
-    return bottle_duration
+    return Number(bottle_duration)
   }
 }
 
