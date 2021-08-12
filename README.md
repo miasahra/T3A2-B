@@ -118,6 +118,68 @@ To reiterate these:
 
 ## PRG1006-7.2 Production testing:
 
+Different to development testing, production testing was completed only recently (once the application was deployed live). This process consisted of sending the deployed app link to the same candidates from the development testing to ensure consistency. The same pre-defined user stories as defined in Part A (Q4) below were used, which each candidate replicated the same workflows under the same constraints - and provided feedback.
+
+To reiterate these:
+
+### As a parent, I want to be able to log feeds so that I can form a routine.
+- **Vicki**:
+  - Liked how they stay logged in on refresh and even if they close their computer down.
+
+- **Courtney**:
+  - Loved current state of the product for logging.
+
+- **Tracey**:
+  - Wouldn't change anything.
+
+### As a parent, I want to be able to form a schedule so that I can make - my life easier.
+
+- **Vicki**:
+  - Used it in her daily life and found it is helping her find the most optimal, "natural" times.
+
+- **Courtney**:
+  - Finding it hard to find averages, having to do it manually for now.
+
+- **Tracey**:
+  - Love the design. Easy to use.
+
+### As a parent, I want to track the data of a feed to make better - informed decisions around my baby's health. 
+
+- **Vicki**:
+  - Loved the new design of the tables.
+
+- **Courtney**:
+  - Prefer graphical (graphs, line charts, etc) representations.
+
+- **Tracey**:
+  - Pitched an export/download to CSV feature.
+
+### As a parent, I want the option to include measurements of formula/- breast milk per feeding session so that I can monitor the baby's growth.
+
+- **Vicki**:
+  - Loves the versatility/flexibility.
+
+- **Courtney**:
+  - Prefers older design.
+
+- **Tracey**:
+  - No feedback.
+
+### As a mother, I want to be able to time feeds for both breasts - alternatively in a singular feeding session.
+
+- **Vicki**:
+  - Uses it daily and loves it!
+
+- **Courtney**:
+  - Uses separate timer app and records entry manually.
+
+- **Tracey**:
+  - Thinks its really useful and prefers new design over old.
+
+### As a father, I want to determine how long my baby feeds for so that I can compare formula feeding to breastfeeding.
+
+- **Nathan**:
+  - Loves it, works well for his schedule.
 
 # T3A2-A
 
