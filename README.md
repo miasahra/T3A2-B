@@ -52,6 +52,70 @@ I did however need to keep myself in check as I did not have anyone to delegate 
 
 ## PRG1006-7.1 Development testing:
 
+User testing was completed throughout the projects development cycle to iterate and refine the overall product. Multiple candidates took part of this experience so that a large enough sample space of data was gathered to make informed decisions on. This was done by using pre-defined user stories as defined in Part A (Q4) below, which each candidate replicated the same workflows under the same constraints - and provided feedback.
+
+To reiterate these:
+
+### As a parent, I want to be able to log feeds so that I can form a routine.
+- **Vicki**:
+  - Liked how the first page to render if logged in is the tracking page - fast and easy.
+
+- **Courtney**:
+  - Did not like that they were required to register if they did not have an account.
+
+- **Tracey**:
+  - Wouldn't change anything with tracking. Loved it
+
+### As a parent, I want to be able to form a schedule so that I can make - my life easier.
+
+- **Vicki**:
+  - History was useful to view past feed times in case she forgot.
+
+- **Courtney**:
+  - Would of liked if it showed a "mean" or "average" for times, measurements, etc to help with forming a schedule.
+
+- **Tracey**:
+  - Felt like a "time in mind" such as 8pm for example was better than going off of the average feeding times.
+
+### As a parent, I want to track the data of a feed to make better - informed decisions around my baby's health. 
+
+- **Vicki**:
+  - Liked how the breast/bottle feeding categories were separated on the History page as she supplement feeded and preferred them distinguished.
+
+- **Courtney**:
+  - Liked the data shown in History but would prefer more graphical representations.
+
+- **Tracey**:
+  - Would prefer if there was a feature to export the History data to a CSV file.
+
+### As a parent, I want the option to include measurements of formula/- breast milk per feeding session so that I can monitor the baby's growth.
+
+- **Vicki**:
+  - Liked how you can toggle between breast and bottle feed types.
+
+- **Courtney**:
+  - Didn't include measurement for breast milk but didn't know why you would need it.
+
+- **Tracey**:
+  - No feedback, loved it.
+
+### As a mother, I want to be able to time feeds for both breasts - alternatively in a singular feeding session.
+
+- **Vicki**:
+  - Loved it
+
+- **Courtney**:
+  - Found it really really useful, although a "automated clock feature" would have been preferable to manual inputs.
+
+- **Tracey**:
+  - Loved it,
+
+### As a father, I want to determine how long my baby feeds for so that I can compare formula feeding to breastfeeding.
+
+- **Nathan**:
+  - Great for distinguishing differences between the time awake his partner is at night compared to when he is awake and bottle feeds.
+
+
 ## PRG1006-7.2 Production testing:
 
 
