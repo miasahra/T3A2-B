@@ -1,3 +1,6 @@
+// Define global API Routes 
+// These will be accessed as `Routes.DASHBOARD`, etc
+// within the app which is a cleaner config.
 const apiRoutes = {
   auth: {
     Login: "/auth/sign_in",
