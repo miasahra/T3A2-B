@@ -1,5 +1,7 @@
 # T3A2-B
 
+Trello: https://trello.com/b/nwC74SxA/t3a2-a-full-stack-app
+
 Repository: https://github.com/miasahra/T3A2-B
 
 Backend: https://feedingtracker-backend.herokuapp.com/
@@ -55,6 +57,47 @@ The Agile methodology was chosen during this application, consisting of both dai
 Due to working on this project independently, task delegation was not a requirement. Upon commencing the project, I distinguished my strengths and weaknesses which led to things such as the chosen tech stack and experience with libraries/frameworks that I utilised.
 
 I did however need to keep myself in check as I did not have anyone to delegate to, which is where I heavily depended on the Agile methodology.
+
+## PRG1006-6.3 User interface:
+
+The user interface is intuitive with a great user flow. It has been designed with minimalism and simplicity in mind, which is why only _few_ pages exist to achieve the products desired outcome.
+
+A few key points include:
+
+- Fully accessible components have been used to ensure that components are completely useable on any browser or device.
+- Labels are associated with inputs for readability and suggestions.
+- Consistent brand colours.
+- Fully responsive for any device viewport.
+- Maintainable code quality.
+
+Screenshots of the design can be shown below:
+
+### Login Page:
+![login page](docs/part-b/screenshots/login.png)
+
+### Register Page:
+![register page](docs/part-b/screenshots/register.png)
+
+### Dependants/Account page:
+![Dependants/Account page](docs/part-b/screenshots/dependants.png)
+
+### Add Dependant modal:
+![add dependant](docs/part-b/screenshots/add_dependant.png)
+
+### History Page:
+![History Page](docs/part-b/screenshots/history.png)
+
+### Dashboard - Bottle:
+![Dashboard - Bottle](docs/part-b/screenshots/dashboard_bottle.png)
+
+### Dashboard - Breast:
+![Dashboard - Breast](docs/part-b/screenshots/dashboard_breast.png)
+
+### Dashboard - Responsive Design:
+![Dashboard - Responsive Design](docs/part-b/screenshots/dashboard_responsive.png)
+
+### Navigation Bar - Responsive Mobile:
+![Navigation Bar - Responsive Mobile](docs/part-b/screenshots/navigation_responsive_mobile.png)
 
 ## PRG1006-7.1 Development testing:
 
