@@ -1,7 +1,9 @@
 const bcrypt = require("bcrypt")
 const jwt = require("jsonwebtoken")
+// Import models
 const User = require("../models/user")
 
+// Define Sign Up controller associated to Route
 const signUp = function (req, res) {
   const newUser = new User(req.body)
   newUser.hash_password = bcrypt.hashSync(req.body.password, 10)
@@ -12,7 +14,7 @@ const signUp = function (req, res) {
         error: err.message,
       })
     }
-    //return res.json(user)
+
     return res.json({
       username: user.username,
       jwt: jwt.sign({
@@ -24,6 +26,7 @@ const signUp = function (req, res) {
   })
 }
 
+// Define Sign In controller associated to Route
 const signIn = function (req, res) {
   User.findOne({
     email: req.body.email,
@@ -34,6 +37,7 @@ const signIn = function (req, res) {
         error: err.message,
       })
     }
+
     if (!user || !user.comparePassword(req.body.password)) {
       res.status(400)
       return res.json({
@@ -51,6 +55,7 @@ const signIn = function (req, res) {
   })
 }
 
+// Checks if user is authenticated
 const loginRequired = function (req, res, next) {
   if (req.user) {
     next()

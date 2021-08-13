@@ -1,13 +1,16 @@
+// Import packages
 const express = require("express")
 const cors = require("cors")
 const bodyParser = require("body-parser")
 const jwt = require("jsonwebtoken")
 const mongoose = require("mongoose")
 
+// Import routers
 const feedsRouter = require("./routes/feedsRoutes")
 const dependantsRouter = require("./routes/dependantsRoutes")
 const authRouter = require("./routes/authRoutes")
 
+// Declare express reqs
 const port = process.env.PORT || 4000
 const app = express()
 
@@ -17,8 +20,10 @@ app.use(bodyParser.json())
 if (process.env.NODE_ENV !== "production") {
   require("dotenv").config()
 }
+
 const dbConn = process.env.MONGODB_URI
 
+// Establish connection with MongoDB
 mongoose.connect(dbConn, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
@@ -34,10 +39,9 @@ mongoose.connect(dbConn, {
   }
 )
 
+// Attach User to every request
 app.use((req, res, next) => {
   if (req.headers && req.headers.authorization) {
-    // req.headers.authorization.split(" ")[1]
-    // Bearer token perhaps
     jwt.verify(req.headers.authorization, process.env.JWT_ACCESS_TOKEN_SECRET, (err, decode) => {
       if (err) {
         req.user = undefined
@@ -52,8 +56,9 @@ app.use((req, res, next) => {
   }
 })
 
+// Declare Routes
 app.get("/", (req, res) => {
-  res.send("Hello world!")
+  res.send("Welcome to Feeding Tracker Backend!")
 })
 
 app.use("/feeds", feedsRouter)

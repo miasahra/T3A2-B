@@ -7,9 +7,11 @@ const {
   updateDependant,
 } = require("../utils/dependantsUtils")
 
+// Import models
 const User = require("../models/user")
 const Feed = require("../models/feed")
 
+// Define method to get all dependants for user
 const getDependantsForUser = function (req, res) {
   getAllDependantsForUser(req).exec((err, dependants) => {
     if (err) {
@@ -22,6 +24,7 @@ const getDependantsForUser = function (req, res) {
   })
 }
 
+// Define method to get all feeds for scoped dependant
 const getFeedsForDependant = function (req, res) {
   getAllFeedsForDependant(req).exec((err, feeds) => {
     if (err) {
@@ -34,6 +37,7 @@ const getFeedsForDependant = function (req, res) {
   })
 }
 
+// Define method to get specific dependent by id
 const getDependant = function (req, res) {
   getDependantById(req.params.id).exec((err, dependant) => {
     if (err) {
@@ -46,6 +50,7 @@ const getDependant = function (req, res) {
   })
 }
 
+// Define method to create a new dependant
 const newDependant = async function (req, res) {
   addDependant(req).save(async (err, dependant) => {
     if (err) {
@@ -65,6 +70,7 @@ const newDependant = async function (req, res) {
   })
 }
 
+// Define method to remove a specific dependant
 const removeDependant = function async (req, res) {
   deleteDependant(req.params.id).exec(async (err, dependant) => {
     if (err) {
@@ -89,6 +95,7 @@ const removeDependant = function async (req, res) {
   })
 }
 
+// Define method to update a specific dependant
 const changeDependant = function (req, res) {
   updateDependant(req).exec((err, dependant) => {
     if (err) {

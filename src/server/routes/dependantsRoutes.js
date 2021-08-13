@@ -2,9 +2,11 @@ const express = require("express")
 
 const router = express.Router()
 
+// Import controller methods
 const { getDependantsForUser, getFeedsForDependant, newDependant, getDependant, removeDependant, changeDependant } = require("../controllers/dependantsController")
 const { loginRequired } = require("../controllers/authController")
 
+// Attach routes to express router
 router.use(loginRequired)
 router.get("/", getDependantsForUser)
 router.get("/:id/feeds", getFeedsForDependant)
