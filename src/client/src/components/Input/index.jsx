@@ -1,6 +1,7 @@
 import React from "react"
 import PropTypes from "prop-types"
 
+// Input component for Tracking page
 function Input({ label, type, placeholder, attribute, value, setValue }) {
   return (
     <div>
@@ -22,6 +23,7 @@ function Input({ label, type, placeholder, attribute, value, setValue }) {
   )
 }
 
+// Define Prop Types for component
 Input.propTypes = {
   label: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,

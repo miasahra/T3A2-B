@@ -13,6 +13,7 @@ import getUsername from "../../assets/utils/getUsername"
 // eslint-disable-next-line import/extensions
 import BabyBottle from "../../assets/img/baby-bottle.png"
 
+// Navigation Bar component to be used in all pages
 export default function NavigationBar({ active }) {
   const username = getUsername()
 
@@ -129,5 +130,6 @@ export default function NavigationBar({ active }) {
   )
 }
 
+// Define Navigation Bar Prop Types
 NavigationBar.propTypes = { active: PropTypes.string }
 NavigationBar.defaultProps = { active: "" }

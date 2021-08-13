@@ -6,6 +6,7 @@ import registerUser from "../../assets/utils/api/registerUser"
 // eslint-disable-next-line import/extensions
 import BabyBottle from "../../assets/img/baby-bottle.png"
 
+// Define Regieter component for register page
 export default function Register({ setToken }) {
   const [username, setUsername] = useState()
   const [email, setEmail] = useState()
@@ -17,8 +18,11 @@ export default function Register({ setToken }) {
     document.title = "Register - Feeding Tracker"
   }, [])
 
+  // Handle register submit button
   const handleSubmit = async (e) => {
     e.preventDefault()
+
+    // Attempt to register user
     const res = await registerUser({
       username,
       email,
@@ -26,6 +30,7 @@ export default function Register({ setToken }) {
       confirmPassword,
     })
 
+    // Handle result
     if (res.message) {
       setError("Authentication failed, please try again!")
     } else if (res.error) {

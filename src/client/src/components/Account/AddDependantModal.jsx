@@ -2,6 +2,7 @@ import { Dialog, Transition } from "@headlessui/react"
 import React, { Fragment } from "react"
 import PropTypes from "prop-types"
 
+// Component for "Add Dependant" modal
 function AddDependantModal({ handleCreateDependant, isOpen, closeModal, setName, name }) {
   return (
     <Transition appear as={Fragment} show={isOpen}>
@@ -85,6 +86,7 @@ function AddDependantModal({ handleCreateDependant, isOpen, closeModal, setName,
   )
 }
 
+// Define Prop Types for component
 AddDependantModal.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   closeModal: PropTypes.func.isRequired,

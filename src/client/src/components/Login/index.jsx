@@ -6,6 +6,7 @@ import loginUser from "../../assets/utils/api/loginUser"
 // eslint-disable-next-line import/extensions
 import BabyBottle from "../../assets/img/baby-bottle.png"
 
+// Login component for Logic page
 export default function Login({ setToken }) {
   const [email, setEmail] = useState()
   const [password, setPassword] = useState()
@@ -15,13 +16,17 @@ export default function Login({ setToken }) {
     document.title = "Login - Feeding Tracker"
   }, [])
 
+  // Handle Login submit button
   const handleSubmit = async (e) => {
     e.preventDefault()
+
+    // Attempt to log user in with provided credentials
     const res = await loginUser({
       email,
       password,
     })
 
+    // Handle result
     if (res.message) {
       setError("Authentication failed, please try again!")
     } else {
@@ -105,4 +110,5 @@ export default function Login({ setToken }) {
   )
 }
 
+// Define Prop Types for component
 Login.propTypes = { setToken: PropTypes.func.isRequired }

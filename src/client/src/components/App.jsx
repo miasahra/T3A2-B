@@ -11,6 +11,7 @@ import AuthedRoute from "./AuthedRoute"
 import Account from "./Account"
 
 function App() {
+  // Handle session management via token
   const { token, setToken } = useToken()
 
   return (
@@ -18,6 +19,9 @@ function App() {
       <Route
         path="/"
         render={() => (
+          // For initial page load,
+          // If token exists, default to Dashboard
+          // Otherwise default to Login
           token ?
             <Redirect to={Routes.Dashboard} /> :
             <Redirect to={Routes.Login} />
@@ -29,6 +33,8 @@ function App() {
       <Route path={Routes.Register}>
         <Register setToken={setToken} />
       </Route>
+
+      {/* Define pages that require authentication */}
       <AuthedRoute component={Dashboard} path={Routes.Dashboard} token={token} />
       <AuthedRoute component={History} path={Routes.History} token={token} />
       <AuthedRoute component={Account} path={Routes.Account} token={token} />

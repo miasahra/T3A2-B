@@ -9,10 +9,13 @@ import Routes from "../../assets/utils/routes"
 import getDependants from "../../assets/utils/api/getDependants"
 import createFeed from "../../assets/utils/api/createFeed"
 
+// Helper function scoped only to this class
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ")
 }
 
+// Dashboard or "Track a Feed" page component.
+// Passes down authentication token
 export default function Dashboard({ token }) {
   const [dependants, setDependants] = useState([])
   const [showDependants, setShowDependants] = useState(false)
@@ -32,6 +35,8 @@ export default function Dashboard({ token }) {
   useEffect(() => {
     document.title = "Track a Feed - Feeding Tracker"
 
+    // Get all dependants on page load that
+    // will be used in the dependant select picker for feed.
     const fetchData = async () => {
       const result = await getDependants(token)
       setDependants(result)
@@ -41,8 +46,10 @@ export default function Dashboard({ token }) {
     fetchData()
   }, [token])
 
+  // Returns true if input is FALSEY.
   const isFalsey = input => input == 0 || input == undefined || input == null || input == false || input == ""
 
+  // Handle submit button for "Track a Feed"
   const handleSubmit = async (e) => {
     e.preventDefault()
 
@@ -61,6 +68,7 @@ export default function Dashboard({ token }) {
 
     let res = null
 
+    // Dynamically Create a Feed depending on feed type.
     if (type == "BREAST") {
       res = await createFeed(token, {
         type,
@@ -177,5 +185,6 @@ export default function Dashboard({ token }) {
   )
 }
 
+// Define Prop Types for component
 Dashboard.propTypes = { token: PropTypes.func.isRequired }
 Dashboard.defaultProps = { token: null }

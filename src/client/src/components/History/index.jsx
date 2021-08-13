@@ -1,15 +1,14 @@
 import React, { useState, useEffect } from "react"
 import PropTypes from "prop-types"
-// import _ from "lodash"
 import { Link } from "react-router-dom"
 import NavigationBar from "../NavigationBar"
 import Routes from "../../assets/utils/routes"
 import getHistory from "../../assets/utils/api/getHistory"
-// import getDependants from "../../assets/utils/api/getDependants"
 // eslint-disable-next-line import/extensions
 import BabyBottle from "../../assets/img/baby-bottle.png"
 import BreastFeeding from "../../assets/img/breast-feeding.jpg"
 
+// Renders "Feeds" table
 function renderTable(feeds, type) {
   const sortedFeeds = feeds.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
 
@@ -135,42 +134,20 @@ function renderTable(feeds, type) {
 
 export default function History({ token }) {
   const [feeds, setFeeds] = useState([])
-  // const [dependants, setDependants] = useState([])
 
   useEffect(() => {
     document.title = "History - Feeding Tracker"
 
+    // Get all feeds on page load to be rendered
     const fetchFeeds = async () => {
       const result = await getHistory(token)
       setFeeds(result)
     }
 
-    // const fetchDependants = async () => {
-    //   const result = await getDependants(token)
-    //   setDependants(result)
-    // }
-
     fetchFeeds()
-    // fetchDependants()
   }, [token])
 
-  // const formatFeedsByDependant = () => {
-  //   const feedGroup = _.groupBy(feeds, "dependant_id")
-  //   const dependantGroup = _.groupBy(dependants, "_id")
-  //   const mergedArrays = _.merge(feedGroup, dependantGroup)
-  //   // eslint-disable-next-line no-debugger
-  //   debugger
-  //   const filteredFeeds = mergedArrays.filter(feed => feed.type)
-  //   console.log("filteredFeeds", filteredFeeds)
-
-  //   return filteredFeeds
-  // }
-
-  // console.log("feeds", feeds)
-  // console.log("dependants", dependants)
-
-  // console.log("formatted: ", formatFeedsByDependant())
-
+  // Categorise feeds
   const breastFeeds = feeds.filter(feed => feed.type == "BREAST")
   const bottleFeeds = feeds.filter(feed => feed.type == "BOTTLE")
 
@@ -204,5 +181,6 @@ export default function History({ token }) {
   )
 }
 
+// Define Prop Types for component
 History.propTypes = { token: PropTypes.func.isRequired }
 History.defaultProps = { token: null }

@@ -3,6 +3,7 @@ import PropTypes from "prop-types"
 import { Listbox, Transition } from "@headlessui/react"
 import { CheckIcon, SelectorIcon } from "@heroicons/react/solid"
 
+// Select input used to for Dependants selector
 function Select({ dependants, selected, setSelected }) {
   return (
     <Fragment>
@@ -63,6 +64,7 @@ function Select({ dependants, selected, setSelected }) {
   )
 }
 
+// Define Prop Types for component
 Select.propTypes = {
   dependants: PropTypes.array.isRequired,
   selected: PropTypes.func.isRequired,

@@ -5,6 +5,7 @@ import getDependants from "../../assets/utils/api/getDependants"
 import createDependant from "../../assets/utils/api/createDependant"
 import AddDependantModal from "./AddDependantModal"
 
+// Renders "Dependants" table
 function renderTable(dependants) {
   const sortedDependants = dependants.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
 
@@ -64,6 +65,8 @@ function renderTable(dependants) {
   )
 }
 
+// `Account` page component
+// Passes down the authentication `token`.
 function Account({ token }) {
   const [dependants, setDependants] = useState([])
   const [isOpen, setIsOpen] = useState(false)
@@ -74,6 +77,7 @@ function Account({ token }) {
   useEffect(() => {
     document.title = "Track a Feed - Feeding Tracker"
 
+    // Fetch Dependants on page load
     const fetchData = async () => {
       const result = await getDependants(token)
       setDependants(result)
@@ -82,6 +86,7 @@ function Account({ token }) {
     fetchData()
   }, [token])
 
+  // Handle "Add" modal
   function closeModal() {
     setIsOpen(false)
   }
@@ -90,8 +95,10 @@ function Account({ token }) {
     setIsOpen(true)
   }
 
+  // Returns true if input is considered FALSEY.
   const isFalsey = input => input == 0 || input == undefined || input == null || input == false || input == ""
 
+  // Handle Submit
   async function handleCreateDependant(e) {
     e.preventDefault()
 
@@ -100,6 +107,8 @@ function Account({ token }) {
       return setError("You must provide a valid name!")
     }
 
+    // Attempt to create Dependant with provided
+    // token and body
     const res = await createDependant(token, { name })
 
     if (res.message) {
@@ -150,6 +159,7 @@ function Account({ token }) {
   )
 }
 
+// Declare Prop Types for component
 Account.propTypes = { token: PropTypes.func }
 
 Account.defaultProps = { token: null }
