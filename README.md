@@ -58,6 +58,14 @@ Due to working on this project independently, task delegation was not a requirem
 
 I did however need to keep myself in check as I did not have anyone to delegate to, which is where I heavily depended on the Agile methodology.
 
+## PRG1006-6.2 Deployment:
+
+The application has been deployed via Heroku. Both separately such as the client and server. This has been done via Heroku-CLI, a command line tool that integrates with a Git repository. The client points to the servers address, so that all data is maintained within the deployed app.
+
+Backend: https://feedingtracker-backend.herokuapp.com/
+
+Frontend: https://feedingtracker-frontend.herokuapp.com/
+
 ## PRG1006-6.3 User interface:
 
 The user interface is intuitive with a great user flow. It has been designed with minimalism and simplicity in mind, which is why only _few_ pages exist to achieve the products desired outcome.
