@@ -6,7 +6,7 @@ Repository: https://github.com/miasahra/T3A2-B
 
 Backend: https://feedingtracker-backend.herokuapp.com/
 
-Frontend: https://feedingtracker-frontend.herokuapp.com/
+Frontend: https://feeding-tracker-frontend.netlify.app/
 
 ## CMP1043-1.3 Appropriate use of libraries used in the app:
 
