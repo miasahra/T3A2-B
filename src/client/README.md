@@ -1,6 +1,6 @@
 # Getting Started with Feeding Tracker
 
-View: https://feedingtracker-frontend.herokuapp.com/
+View: https://feedingtracker-frontend.netlify.app/
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
